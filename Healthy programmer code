@@ -1,0 +1,52 @@
+# Healthy programmer project
+# 9 am - 5 pm
+# Water - 3.6 Litres - water.mp3 - every 30 mins - done - log
+# eye -  eye exercise - eye.mp3- every 45 mins - done - log
+# physial exercise - ph exe - ph.mp3 - every 1 hr - done - log
+# use of pygame and time module
+from time import time
+from pygame import mixer
+from datetime import datetime
+
+def musiconloop(file,stopper):
+    mixer.init()
+    mixer.music.load(file)
+    mixer.music.play()
+    while True:
+        a = input()
+        if a == stopper:
+            mixer.music.stop()
+            break
+
+def logs_now(msg):
+    with open("logs_now.txt","a") as f:
+        f.write(f"{msg} {datetime.now()}")
+
+if __name__ == '__main__':
+    # musiconloop("water.mp3","stop")
+    init_water = time()
+    init_es = time()
+    init_ps = time()
+    ws = 5
+    es = 10
+    ps = 15
+    while True:
+        if time() - init_water > ws:
+            print("Water drinking message.Type done after you drink the water.")
+            musiconloop("water.mp3","done")
+            init_water = time()
+            logs_now("\n Drank water at:")
+
+        if time() - init_es > es:
+            print("Eye exercising message.Type done after you have completed the eye exercise.")
+            musiconloop("water.mp3","done")
+            init_es = time()
+            logs_now("\n Eye exercise at:")
+
+        if time() - init_ps > ps:
+            print("Physical exercise message.Type done after you completed the exercise.")
+            musiconloop("water.mp3","done")
+            init_ps = time()
+            logs_now("\n Physical exercise at:")
+
+
